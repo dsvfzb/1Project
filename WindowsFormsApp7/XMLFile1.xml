@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<records>
+	<record>
+		<location>Київ</location>
+		<boiler_number>1</boiler_number>
+		<heating_objects_count>5</heating_objects_count>
+		<start_date>2023-10-01</start_date>
+		<start_temperature>15.5</start_temperature>
+		<end_date>2024-04-30</end_date>
+	</record>
+	<record>
+		<location>Львів</location>
+		<boiler_number>2</boiler_number>
+		<heating_objects_count>3</heating_objects_count>
+		<start_date>2023-10-20</start_date>
+		<start_temperature>10.2</start_temperature>
+		<end_date>2024-04-15</end_date>
+	</record>
+</records>

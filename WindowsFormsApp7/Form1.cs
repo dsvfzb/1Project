@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,8 +10,8 @@ namespace HeatingSystem
     {
         private List<HeatingSystemRecord> records;
         private int longSeasonCount;
-        private Label labelCount; // Объявление переменной labelCount
-        private TextBox textBoxLocation; // Объявление переменной textBoxLocation
+        private Label labelCount;
+        private TextBox textBoxLocation;
 
         public MainForm()
         {
@@ -20,10 +20,8 @@ namespace HeatingSystem
             LoadData();
             tabControl1.Selected += new TabControlEventHandler(tabControl1_Selected);
 
-            // Добавление кнопок навигации на все вкладки
             AddNavigationButtons();
 
-            // Инициализация labelCount
             labelCount = new Label
             {
                 Location = new System.Drawing.Point(10, 220),
@@ -31,7 +29,6 @@ namespace HeatingSystem
             };
             this.Controls.Add(labelCount);
 
-            // Инициализация textBoxLocation
             textBoxLocation = new TextBox
             {
                 Location = new System.Drawing.Point(120, 10),
@@ -39,20 +36,18 @@ namespace HeatingSystem
             };
             this.Controls.Add(textBoxLocation);
 
-            // Установка высоты DataGridView
             dataGridView1.Height = 180;
 
-            // Создаем кнопки для переключения на другие вкладки
             Button btnAllBoilers = new Button
             {
                 Text = "Всі котельні",
                 Location = new System.Drawing.Point(20, 700),
                 Size = new System.Drawing.Size(100, 30),
             };
-            btnAllBoilers.Click += (sender, e) => tabControl1.SelectedIndex = 1; // Переключение на вкладку "Всі котельні"
+            btnAllBoilers.Click += (sender, e) => tabControl1.SelectedIndex = 1;
             tabPage1.Controls.Add(btnAllBoilers);
-            btnAllBoilers.Click += (sender, e) => tabControl1.SelectedIndex = 1; // Переключение на вкладку "Всі котельні"
-            tabPage1.Controls.Add(btnAllBoilers); // Добавляем кнопку на первую вкладку
+            btnAllBoilers.Click += (sender, e) => tabControl1.SelectedIndex = 1;
+            tabPage1.Controls.Add(btnAllBoilers);
 
             Button btnLateSeason = new Button
             {
@@ -60,8 +55,8 @@ namespace HeatingSystem
                 Location = new System.Drawing.Point(140, 700),
                 Size = new System.Drawing.Size(180, 30),
             };
-            btnLateSeason.Click += (sender, e) => tabControl1.SelectedIndex = 2; // Переключение на вкладку "Сезон пізніше 15 жовтня"
-            tabPage1.Controls.Add(btnLateSeason); // Добавляем кнопку на первую вкладку
+            btnLateSeason.Click += (sender, e) => tabControl1.SelectedIndex = 2;
+            tabPage1.Controls.Add(btnLateSeason);
 
             Button btnLongSeason = new Button
             {
@@ -69,8 +64,8 @@ namespace HeatingSystem
                 Location = new System.Drawing.Point(340, 700),
                 Size = new System.Drawing.Size(120, 30),
             };
-            btnLongSeason.Click += (sender, e) => tabControl1.SelectedIndex = 3; // Переключение на вкладку "Більше 6 місяців"
-            tabPage1.Controls.Add(btnLongSeason); // Добавляем кнопку на первую вкладку
+            btnLongSeason.Click += (sender, e) => tabControl1.SelectedIndex = 3;
+            tabPage1.Controls.Add(btnLongSeason);
 
             Button btnShortestSeason = new Button
             {
@@ -78,13 +73,12 @@ namespace HeatingSystem
                 Location = new System.Drawing.Point(480, 700),
                 Size = new System.Drawing.Size(140, 30),
             };
-            btnShortestSeason.Click += (sender, e) => tabControl1.SelectedIndex = 4; // Переключение на вкладку "Найкоротший сезон"
-            tabPage1.Controls.Add(btnShortestSeason); // Добавляем кнопку на первую вкладку
+            btnShortestSeason.Click += (sender, e) => tabControl1.SelectedIndex = 4;
+            tabPage1.Controls.Add(btnShortestSeason);
         }
 
         private void AddNavigationButtons()
         {
-            // Создание кнопок для каждой вкладки, кроме первой
             for (int i = 1; i < tabControl1.TabPages.Count; i++)
             {
                 var tabPage = tabControl1.TabPages[i];
@@ -93,7 +87,7 @@ namespace HeatingSystem
                     Text = tabPage.Text,
                     Location = new System.Drawing.Point(20 + (i - 1) * 110, 10),
                     Size = new System.Drawing.Size(100, 30),
-                    Tag = i // Используем Tag для хранения индекса вкладки
+                    Tag = i 
                 };
                 button.Click += NavigateToTabPage;
                 tabPage.Controls.Add(button);
@@ -154,7 +148,7 @@ namespace HeatingSystem
                 Дата_кінця = r.EndDate.ToShortDateString()
             }).ToList();
 
-            FormatDataGridView(); // Применение форматирования после обновления данных
+            FormatDataGridView();
         }
 
         // Метод сортування Шелла
@@ -183,13 +177,10 @@ namespace HeatingSystem
 
         private void FormatDataGridView()
         {
-            // Установка ширины первого столбца
             if (dataGridView1.Columns.Count > 0)
             {
                 dataGridView1.Columns[0].Width = 260;
             }
-
-            // Установка заголовков столбцов на украинском языке
             if (dataGridView1.Columns.Count > 5)
             {
                 dataGridView1.Columns[0].HeaderText = "Місцезнаходження";
@@ -199,8 +190,6 @@ namespace HeatingSystem
                 dataGridView1.Columns[4].HeaderText = "Температура початку";
                 dataGridView1.Columns[5].HeaderText = "Дата кінця";
             }
-
-            // Установка стиля DataGridView
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Arial", 10, System.Drawing.FontStyle.Bold);
             dataGridView1.DefaultCellStyle.Font = new System.Drawing.Font("Arial", 10);
@@ -325,7 +314,7 @@ namespace HeatingSystem
                 }
             }
 
-            return -1; // Запис не знайдено
+            return -1;
         }
 
 
@@ -344,12 +333,12 @@ namespace HeatingSystem
 
         private void tabControl1_Selected(object sender, TabControlEventArgs e)
         {
-            if (e.TabPageIndex == 0) // Перша вкладка
+            if (e.TabPageIndex == 0)
             {
-                RefreshDataGridView(); // Оновлення DataGridView з усіма записами
-                dataGridView1.Height = 180; // Зміна висоти DataGridView для першої вкладки
+                RefreshDataGridView();
+                dataGridView1.Height = 180;
             }
-            else if (e.TabPageIndex == 1) // "Всі котельні"
+            else if (e.TabPageIndex == 1)
             {
                 dataGridView1.DataSource = null;
                 var allRecords = records.Select(r => new
@@ -363,9 +352,9 @@ namespace HeatingSystem
                     Тривалість = (r.EndDate - r.StartDate).Days
                 }).ToList();
                 dataGridView1.DataSource = allRecords;
-                FormatDataGridView(); // Применение форматирования после обновления данных
+                FormatDataGridView();
             }
-            else if (e.TabPageIndex == 2) // "Сезон пізніше 15 жовтня"
+            else if (e.TabPageIndex == 2) 
             {
                 dataGridView1.DataSource = null;
                 var filteredRecords = records
@@ -381,9 +370,9 @@ namespace HeatingSystem
                         Тривалість = (r.EndDate - r.StartDate).Days
                     }).ToList();
                 dataGridView1.DataSource = filteredRecords;
-                FormatDataGridView(); // Применение форматирования после обновления данных
+                FormatDataGridView();
             }
-            else if (e.TabPageIndex == 3) // "Більше 6 місяців"
+            else if (e.TabPageIndex == 3)
             {
                 dataGridView1.DataSource = null;
                 longSeasonCount = records.Count(r => (r.EndDate - r.StartDate).TotalDays > 180);
@@ -400,9 +389,9 @@ namespace HeatingSystem
                     }).ToList();
                 dataGridView1.DataSource = filteredRecords;
                 labelCount.Text = $"Кількість котельній з сезоном більше 6 місяців: {longSeasonCount}";
-                FormatDataGridView(); // Применение форматирования после обновления данных
+                FormatDataGridView();
             }
-            else if (e.TabPageIndex == 4) // "Найкоротший сезон"
+            else if (e.TabPageIndex == 4)
             {
                 dataGridView1.DataSource = null;
                 var minDuration = records.Min(r => (r.EndDate - r.StartDate).Days);
@@ -418,15 +407,15 @@ namespace HeatingSystem
                                                  Тривалість = (r.EndDate - r.StartDate).Days
                                              }).ToList();
                 dataGridView1.DataSource = filteredRecords;
-                FormatDataGridView(); // Применение форматирования после обновления данных
+                FormatDataGridView();
             }
-            dataGridView1.Height = (e.TabPageIndex == 0) ? 180 : 340; // Зміна висоти DataGridView для інших вкладок
+            dataGridView1.Height = (e.TabPageIndex == 0) ? 180 : 340;
         }
 
 
         private void numericUpDownStartTemperature_ValueChanged(object sender, EventArgs e)
         {
-            // Обработчик изменения значения температуры, если потребуется
+            
         }
 
         private void label12_Click(object sender, EventArgs e)
